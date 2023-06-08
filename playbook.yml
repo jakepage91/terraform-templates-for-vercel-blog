@@ -1,0 +1,19 @@
+- name: Upload files to remote_machine
+  hosts: komiser
+  become: true
+  tasks:
+    - name: Upload docker-compose files
+      copy:
+        src: scripts/docker-compose.yml
+        dest: /home/ec2-user/docker-compose.yml
+        owner: ec2-user
+        group: ec2-user
+        mode: "0644"
+      
+    - name: ensure Docker is running
+      service:
+        name: docker
+        state: started
+
+    - name: Run blog as a docker container
+      command: "docker-compose -f docker-compose.yml up -d"

@@ -1,0 +1,9 @@
+version: "3.2"
+
+services:
+  komiser:
+    image: jakepage91/vercel-blog:latest
+    restart: always
+    platform: linux/amd64
+    ports:
+      - 3000:3000
